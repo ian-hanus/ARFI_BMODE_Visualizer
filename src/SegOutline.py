@@ -33,9 +33,8 @@ def plot_combine(seg_file, bmode_file, arfi_file, lesion_slice_index, ax, fig):
     seg_data = seg_data.transpose()
          
     # Split scaling of segmentation voxels for each dimension
-    seg_voxel_size = {'lat': sum(seg_voxel_scale[0])}
-    seg_voxel_size['axial'] = abs(sum(seg_voxel_scale[1]))
-    seg_voxel_size['ele'] = abs(sum(seg_voxel_scale[2]))
+    seg_voxel_size = {'lat': sum(seg_voxel_scale[0]), 'axial': abs(sum(seg_voxel_scale[1])),
+                      'ele': abs(sum(seg_voxel_scale[2]))}
     seg_ele = [y*seg_voxel_size['ele'] for y in range(0, seg_data.shape[1])]
     seg_ele -= max(seg_ele) / 2
      

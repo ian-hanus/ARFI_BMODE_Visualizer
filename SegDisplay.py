@@ -106,8 +106,11 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     # Refresh Apply button state
     self.onSelect()
 
+
+
   def onSelect(self):
     self.applyButton.enabled = self.bmodeSelector.currentNode() and self.arfiSelector.currentNode() and self.segmentationSelector.currentNode()
+
 
   def onApplyButton(self):  
     lm = slicer.app.layoutManager()
@@ -116,12 +119,12 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     # Print current slice offset position
     redOffset = redLogic.GetSliceOffset()
     sliceIndex = redLogic.GetSliceIndexFromOffset(redOffset)
-    
+
     def pathFromNode(node):
         storageNode=node.GetStorageNode()
         if storageNode is not None: # loaded via drag-drop
             filepath=storageNode.GetFullNameFromFileName()
-        else: # loaded via DICOM browser
+        else:
             instanceUIDs=node.GetAttribute('DICOM.instanceUIDs').split()
             filepath=slicer.dicomDatabase.fileForInstance(instUids[0])
         return filepath
@@ -130,11 +133,17 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     bmodeNode = self.bmodeSelector.currentNode()
     arfiNode = self.arfiSelector.currentNode()
     segNode = self.segmentationSelector.currentNode()
-    
+
+    bmodeVolumeDisplay = bmodeNode.GetScalarVolumeDisplayNode()
+    bmodeWindow = bmodeVolumeDisplay.GetWindow()
+    bmodeLevelMin = bmodeVolumeDisplay.GetWindowLevelMin()
+    print("%d to %d" %(bmodeLevelMin, bmodeLevelMin + bmodeWindow))
+
     bmodeFile = pathFromNode(bmodeNode)
     arfiFile = pathFromNode(arfiNode)
     segFile = pathFromNode(segNode)
-    
+
+
     f = open("C:\Users\Ian_Hanus\Desktop\SlicerCustomVisualization\CustomVisualization\DisplayPlot\myInput.txt", "w+")
     
     f.write("%s, %s, %s, %s" % (segFile, bmodeFile, arfiFile, sliceIndex))
