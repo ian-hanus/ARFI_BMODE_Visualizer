@@ -105,12 +105,9 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
 
     # Refresh Apply button state
     self.onSelect()
-    
-
 
   def onSelect(self):
     self.applyButton.enabled = self.bmodeSelector.currentNode() and self.arfiSelector.currentNode() and self.segmentationSelector.currentNode()
-    
 
   def onApplyButton(self):  
     lm = slicer.app.layoutManager()
