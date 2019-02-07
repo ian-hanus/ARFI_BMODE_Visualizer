@@ -1,5 +1,5 @@
 def plot_combine(seg_file, bmode_file, capsule_file, lesion_slice_index, bmode_window, bmode_min_level, capsule_window,
-                 capsule_min_level, swei_flag, ax, fig):
+                 capsule_min_level, swei_flag, outline_flag, ax, fig):
     import matplotlib.pyplot as plt
     import nibabel as nib
     import nrrd
@@ -89,14 +89,15 @@ def plot_combine(seg_file, bmode_file, capsule_file, lesion_slice_index, bmode_w
 
     # Create B-mode array where segmentation is not
     bmode_filtered = seg_binary_inv * bmode_data
+    if(outline_flag == 1):
+        for x in range(0, seg_binary_inv.shape[0] - 1):
+            for y in range(0, seg_binary_inv.shape[1] - 1):
+                if checkNeighbors(x, y, seg_binary_inv):
+                    x_delta = [0, 0, 0, -1, 1, -1, 1, -1, 1]
+                    y_delta = [0, -1, 1, 0, 0, -1, 1, 1, -1]
+                    for z in range(0, len(x_delta)):
+                        bmode_filtered[x+x_delta[z]][y+y_delta[z]] = 255
 
-    for x in range(0, seg_binary_inv.shape[0] - 1):
-        for y in range(0, seg_binary_inv.shape[1] - 1):
-            if checkNeighbors(x, y, seg_binary_inv):
-                bmode_filtered[x][y] = 255
-                bmode_filtered[x+1][y] = 255
-                bmode_filtered[x][y+1] = 255
-                bmode_filtered[x][y-1] = 255
 
 
 

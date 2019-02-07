@@ -121,12 +121,14 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     # Radio buttons
     self.arfiButton = qt.QRadioButton("ARFI Capsule")
     self.arfiButton.setChecked(True)
-
     self.sweiButton = qt.QRadioButton("SWEI Capsule")
-
-
     parametersFormLayout.addRow("Capsule Type:", self.arfiButton)
     parametersFormLayout.addRow("", self.sweiButton)
+
+    # Outline checkbox
+    self.outlineCheck = qt.QCheckBox("")
+    self.outlineCheck.setChecked(False)
+    parametersFormLayout.addRow("White Outline Around Capsule: ", self.outlineCheck)
 
     # Add vertical spacer
     self.layout.addStretch(1)
@@ -185,11 +187,14 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     capsuleFile = pathFromNode(capsuleNode)
     segFile = pathFromNode(segNode)
 
+    outline = 0;
+    if self.outlineCheck.isChecked():
+      outline = 1
 
     f = open("C:\Users\Ian_Hanus\Desktop\SlicerCustomVisualization\CustomVisualization\DisplayPlot\myInput.txt", "w+")
     
-    f.write("%s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, sliceIndex, bmodeWindow,
-                                                    bmodeLevelMin, capsuleWindow, capsuleLevelMin, sweiFlag))
+    f.write("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, sliceIndex, bmodeWindow,
+                                                    bmodeLevelMin, capsuleWindow, capsuleLevelMin, sweiFlag, outline))
 
     
     f.close()

@@ -15,5 +15,5 @@ inputs = stringInputs.split(", ")
 # Call function to plot ARFI segment with B-mode background
 fig, ax = plt.subplots()
 plot_combine(inputs[0], inputs[1], inputs[2], int(inputs[3]), float(inputs[4]), float(inputs[5]), float(inputs[6]),
-             float(inputs[7]), int(inputs[8]), ax, fig)
+             float(inputs[7]), int(inputs[8]), int(inputs[9]), ax, fig)
 plt.show()
