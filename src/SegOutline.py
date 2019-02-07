@@ -1,9 +1,10 @@
-def plot_combine(seg_file, bmode_file, arfi_file, lesion_slice_index, ax, fig):
+def plot_combine(seg_file, bmode_file, capsule_file, lesion_slice_index, bmode_window, bmode_min_level, capsule_window,
+                 capsule_min_level, swei_flag, ax, fig):
     import matplotlib.pyplot as plt
     import nibabel as nib
     import nrrd
     import numpy as np
-    
+
     # Import full segmentation file
     seg_total = nrrd.read(seg_file)
     
@@ -59,15 +60,15 @@ def plot_combine(seg_file, bmode_file, arfi_file, lesion_slice_index, ax, fig):
     bmode_ele -= max(bmode_ele) / 2
     
     # Load ARFI file and split metadata from data
-    arfi_total = nib.load(arfi_file)
-    arfi_data = arfi_total.get_data()
-    
+    capsule_total = nib.load(capsule_file)
+    capsule_data = capsule_total.dataobj[..., :]
+
     # Read relative scalings of each dimension
-    arfi_data = arfi_data[:, :, lesion_slice_index, 0]
-    arfi_data = arfi_data.transpose()
-    arfi_voxel_size = {'axial': arfi_total.get_qform()[0, 0], 'ele': arfi_total.get_qform()[1, 1]}
-    arfi_ele = [y*arfi_voxel_size['ele'] for y in range(0, arfi_data.shape[1])]
-    arfi_ele -= max(arfi_ele) / 2
+    capsule_data = capsule_data[:, :, lesion_slice_index]
+    capsule_data = capsule_data.transpose()
+    capsule_voxel_size = {'axial': capsule_total.get_qform()[0, 0], 'ele': capsule_total.get_qform()[1, 1]}
+    capsule_ele = [y*capsule_voxel_size['ele'] for y in range(0, capsule_data.shape[1])]
+    capsule_ele -= max(capsule_ele) / 2
     
     # Get final resolution of the image
     xlim = int(bmode_data.shape[0])
@@ -83,19 +84,25 @@ def plot_combine(seg_file, bmode_file, arfi_file, lesion_slice_index, ax, fig):
     seg_binary_inv = 1 - seg_binary
     
     # Create array of ARFI values where segmentation is
-    arfi_filtered = seg_binary * arfi_data
-    arfi_filtered[arfi_filtered == 0] = np.NaN        
+    capsule_filtered = seg_binary * capsule_data
+    capsule_filtered[capsule_filtered == 0] = np.NaN        
     
     # Create B-mode array where segmentation is not
     bmode_filtered = seg_binary_inv * bmode_data
     
     # Show the arrays on the same set of axes w/ different colormaps
-    ax.imshow(bmode_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)], cmap='gray')
-    cax = ax.imshow(arfi_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)],
-                    cmap='copper')
+    ax.imshow(bmode_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)], cmap='gray',
+              vmin=bmode_min_level, vmax=bmode_min_level + bmode_window)
+    if swei_flag == 0:
+        ax.imshow(capsule_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)],
+                            cmap='copper', vmin=capsule_min_level, vmax=capsule_min_level + capsule_window)
+        plt.title("ARFI Capsule/B-mode Background")
+    else:
+        cax = ax.imshow(capsule_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)],
+                        cmap='inferno_r', vmin=capsule_min_level, vmax=capsule_min_level + capsule_window)
+        plt.title("SWEI Capsule/B-mode Background")
+        fig.colorbar(cax)
     
     # Add title, labels, and colorbar
     ax.set_xlabel("Elevation (mm)")
     ax.set_ylabel("Depth (mm)")
-    plt.title("ARFI Capsule/B-mode Background")
-    fig.colorbar(cax)

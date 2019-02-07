@@ -8,6 +8,10 @@ import logging
 # SegDisplay
 #
 
+#
+# To do: make checkbox to capture arfi level and window
+#
+
 class SegDisplay(ScriptedLoadableModule):
   """Uses ScriptedLoadableModule base class, available at:
   https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
@@ -72,6 +76,19 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     self.arfiSelector.setMRMLScene( slicer.mrmlScene )
     self.arfiSelector.setToolTip( "Pick the ARFI volume." )
     parametersFormLayout.addRow("ARFI Volume: ", self.arfiSelector)
+
+    # SWEI volume selector
+    self.sweiSelector = slicer.qMRMLNodeComboBox()
+    self.sweiSelector.nodeTypes = ["vtkMRMLScalarVolumeNode"]
+    self.sweiSelector.selectNodeUponCreation = True
+    self.sweiSelector.addEnabled = False
+    self.sweiSelector.removeEnabled = False
+    self.sweiSelector.noneEnabled = False
+    self.sweiSelector.showHidden = False
+    self.sweiSelector.showChildNodeTypes = False
+    self.sweiSelector.setMRMLScene( slicer.mrmlScene )
+    self.sweiSelector.setToolTip( "Pick the SWEI volume." )
+    parametersFormLayout.addRow("SWEI Volume: ", self.sweiSelector)
     
     # Segmentation selector
     self.segmentationSelector = slicer.qMRMLNodeComboBox()
@@ -98,8 +115,19 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     self.applyButton.connect('clicked(bool)', self.onApplyButton)
     self.bmodeSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
     self.arfiSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
+    self.sweiSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
     self.segmentationSelector.connect("currentNodeChanged(vtkMRMLSegmentationNode*)", self.onSelect)
-    
+
+    # Radio buttons
+    self.arfiButton = qt.QRadioButton("ARFI Capsule")
+    self.arfiButton.setChecked(True)
+
+    self.sweiButton = qt.QRadioButton("SWEI Capsule")
+
+
+    parametersFormLayout.addRow("Capsule Type:", self.arfiButton)
+    parametersFormLayout.addRow("", self.sweiButton)
+
     # Add vertical spacer
     self.layout.addStretch(1)
 
@@ -109,7 +137,8 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
 
 
   def onSelect(self):
-    self.applyButton.enabled = self.bmodeSelector.currentNode() and self.arfiSelector.currentNode() and self.segmentationSelector.currentNode()
+    self.applyButton.enabled = self.bmodeSelector.currentNode() and self.arfiSelector.currentNode() and self.segmentationSelector.currentNode() and self.sweiSelector.currentNode()
+
 
 
   def onApplyButton(self):  
@@ -119,6 +148,8 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     # Print current slice offset position
     redOffset = redLogic.GetSliceOffset()
     sliceIndex = redLogic.GetSliceIndexFromOffset(redOffset)
+
+    sweiImage = self.sweiButton.isChecked()
 
     def pathFromNode(node):
         storageNode=node.GetStorageNode()
@@ -132,21 +163,34 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     # Get file names to plug into runDisplay
     bmodeNode = self.bmodeSelector.currentNode()
     arfiNode = self.arfiSelector.currentNode()
+    sweiNode = self.sweiSelector.currentNode()
     segNode = self.segmentationSelector.currentNode()
 
     bmodeVolumeDisplay = bmodeNode.GetScalarVolumeDisplayNode()
     bmodeWindow = bmodeVolumeDisplay.GetWindow()
     bmodeLevelMin = bmodeVolumeDisplay.GetWindowLevelMin()
-    print("%d to %d" %(bmodeLevelMin, bmodeLevelMin + bmodeWindow))
 
     bmodeFile = pathFromNode(bmodeNode)
-    arfiFile = pathFromNode(arfiNode)
+    if sweiImage:
+      capsuleNode = sweiNode
+      sweiFlag = 1
+    else:
+      capsuleNode = arfiNode
+      sweiFlag = 0
+
+    capsuleVolumeDisplay = capsuleNode.GetScalarVolumeDisplayNode()
+    capsuleWindow = capsuleVolumeDisplay.GetWindow()
+    capsuleLevelMin = capsuleVolumeDisplay.GetWindowLevelMin()
+
+    capsuleFile = pathFromNode(capsuleNode)
     segFile = pathFromNode(segNode)
 
 
     f = open("C:\Users\Ian_Hanus\Desktop\SlicerCustomVisualization\CustomVisualization\DisplayPlot\myInput.txt", "w+")
     
-    f.write("%s, %s, %s, %s" % (segFile, bmodeFile, arfiFile, sliceIndex))
+    f.write("%s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, sliceIndex, bmodeWindow,
+                                                    bmodeLevelMin, capsuleWindow, capsuleLevelMin, sweiFlag))
+
     
     f.close()
     
