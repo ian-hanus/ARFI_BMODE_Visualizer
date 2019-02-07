@@ -85,11 +85,21 @@ def plot_combine(seg_file, bmode_file, capsule_file, lesion_slice_index, bmode_w
     
     # Create array of ARFI values where segmentation is
     capsule_filtered = seg_binary * capsule_data
-    capsule_filtered[capsule_filtered == 0] = np.NaN        
-    
+    capsule_filtered[capsule_filtered == 0] = np.NaN
+
     # Create B-mode array where segmentation is not
     bmode_filtered = seg_binary_inv * bmode_data
-    
+
+    for x in range(0, seg_binary_inv.shape[0] - 1):
+        for y in range(0, seg_binary_inv.shape[1] - 1):
+            if checkNeighbors(x, y, seg_binary_inv):
+                bmode_filtered[x][y] = 255
+                bmode_filtered[x+1][y] = 255
+                bmode_filtered[x][y+1] = 255
+                bmode_filtered[x][y-1] = 255
+
+
+
     # Show the arrays on the same set of axes w/ different colormaps
     ax.imshow(bmode_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)], cmap='gray',
               vmin=bmode_min_level, vmax=bmode_min_level + bmode_window)
@@ -106,3 +116,13 @@ def plot_combine(seg_file, bmode_file, capsule_file, lesion_slice_index, bmode_w
     # Add title, labels, and colorbar
     ax.set_xlabel("Elevation (mm)")
     ax.set_ylabel("Depth (mm)")
+
+
+def checkNeighbors(x_coordinate, y_coordinate, seg_binary_inverse):
+    if seg_binary_inverse[x_coordinate][y_coordinate] != 0:
+        x_delta = [0, 0, -1, 1, -1, 1, -1, 1]
+        y_delta = [-1, 1, 0, 0, -1, 1, 1, -1]
+        for x in range(0, len(x_delta)):
+            if seg_binary_inverse[x_coordinate + x_delta[x]][y_coordinate + y_delta[x]] == 0:
+                return True
+    return False
