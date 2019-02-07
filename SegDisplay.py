@@ -193,26 +193,12 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
 
     
     f.close()
-    
-#
-# SegDisplayLogic
-#
+
 
 class SegDisplayLogic(ScriptedLoadableModuleLogic):
-  """This class should implement all the actual
-  computation done by your module.  The interface
-  should be such that other python code can import
-  this class and make use of the functionality without
-  requiring an instance of the Widget.
-  Uses ScriptedLoadableModuleLogic base class, available at:
-  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
-  """
 
   def hasImageData(self,volumeNode):
-    """This is an example logic method that
-    returns true if the passed in volume
-    node has valid image data
-    """
+
     if not volumeNode:
       logging.debug('hasImageData failed: no volume node')
       return False
@@ -222,8 +208,6 @@ class SegDisplayLogic(ScriptedLoadableModuleLogic):
     return True
 
   def isValidInputOutputData(self, inputVolumeNode, outputVolumeNode):
-    """Validates if the output is not the same as input
-    """
     if not inputVolumeNode:
       logging.debug('isValidInputOutputData failed: no input volume node defined')
       return False
@@ -272,9 +256,6 @@ class SegDisplayLogic(ScriptedLoadableModuleLogic):
     annotationLogic.CreateSnapShot(name, description, type, 1, imageData)
 
   def run(self, inputVolume, outputVolume, imageThreshold, enableScreenshots=0):
-    """
-    Run the actual algorithm
-    """
 
     if not self.isValidInputOutputData(inputVolume, outputVolume):
       slicer.util.errorDisplay('Input volume is the same as output volume. Choose a different output volume.')
@@ -296,39 +277,16 @@ class SegDisplayLogic(ScriptedLoadableModuleLogic):
 
 
 class SegDisplayTest(ScriptedLoadableModuleTest):
-  """
-  This is the test case for your scripted module.
-  Uses ScriptedLoadableModuleTest base class, available at:
-  https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
-  """
 
   def setUp(self):
-    """ Do whatever is needed to reset the state - typically a scene clear will be enough.
-    """
     slicer.mrmlScene.Clear(0)
 
   def runTest(self):
-    """Run as few or as many tests as needed here.
-    """
     self.setUp()
     self.test_SegDisplay1()
 
   def test_SegDisplay1(self):
-    """ Ideally you should have several levels of tests.  At the lowest level
-    tests should exercise the functionality of the logic with different inputs
-    (both valid and invalid).  At higher levels your tests should emulate the
-    way the user would interact with your code and confirm that it still works
-    the way you intended.
-    One of the most important features of the tests is that it should alert other
-    developers when their changes will have an impact on the behavior of your
-    module.  For example, if a developer removes a feature that you depend on,
-    your test should break so they know that the feature is needed.
-    """
-
     self.delayDisplay("Starting the test")
-    #
-    # first, get some data
-    #
     import urllib
     downloads = (
         ('http://slicer.kitware.com/midas3/download?items=5767', 'FA.nrrd', slicer.util.loadVolume),
