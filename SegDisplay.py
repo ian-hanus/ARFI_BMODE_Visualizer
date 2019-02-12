@@ -103,6 +103,20 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     self.segmentationSelector.setToolTip( "Pick the capsule segmentation." )
     parametersFormLayout.addRow("Segmentation: ", self.segmentationSelector)
 
+    # Arfi Mask Selector
+    self.maskSelector = slicer.qMRMLNodeComboBox()
+    self.maskSelector.nodeTypes = ["vtkMRMLScalarVolumeNode"]
+    self.maskSelector.selectNodeUponCreation = True
+    self.maskSelector.addEnabled = False
+    self.maskSelector.removeEnabled = False
+    self.maskSelector.noneEnabled = False
+    self.maskSelector.showHidden = False
+    self.maskSelector.showChildNodeTypes = False
+    self.maskSelector.setMRMLScene( slicer.mrmlScene )
+    self.maskSelector.setToolTip( "Pick the Mask volume." )
+    parametersFormLayout.addRow("Mask Volume: ", self.maskSelector)
+
+
     #
     # Apply button
     #
@@ -117,6 +131,7 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     self.arfiSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
     self.sweiSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
     self.segmentationSelector.connect("currentNodeChanged(vtkMRMLSegmentationNode*)", self.onSelect)
+    self.maskSelector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
 
     # Radio buttons
     self.arfiButton = qt.QRadioButton("ARFI Capsule")
@@ -139,7 +154,7 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
 
 
   def onSelect(self):
-    self.applyButton.enabled = self.bmodeSelector.currentNode() and self.arfiSelector.currentNode() and self.segmentationSelector.currentNode() and self.sweiSelector.currentNode()
+    self.applyButton.enabled = self.bmodeSelector.currentNode() and self.arfiSelector.currentNode() and self.segmentationSelector.currentNode() and self.sweiSelector.currentNode() and self.maskSelector.currentNode()
 
 
 
@@ -167,6 +182,7 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     arfiNode = self.arfiSelector.currentNode()
     sweiNode = self.sweiSelector.currentNode()
     segNode = self.segmentationSelector.currentNode()
+    maskNode = self.maskSelector.currentNode()
 
     bmodeVolumeDisplay = bmodeNode.GetScalarVolumeDisplayNode()
     bmodeWindow = bmodeVolumeDisplay.GetWindow()
@@ -186,6 +202,7 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
 
     capsuleFile = pathFromNode(capsuleNode)
     segFile = pathFromNode(segNode)
+    maskFile = pathFromNode(maskNode)
 
     outline = 0;
     if self.outlineCheck.isChecked():
@@ -193,7 +210,7 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
 
     f = open("C:\Users\Ian_Hanus\Desktop\SlicerCustomVisualization\CustomVisualization\DisplayPlot\myInput.txt", "w+")
     
-    f.write("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, sliceIndex, bmodeWindow,
+    f.write("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, maskFile, sliceIndex, bmodeWindow,
                                                     bmodeLevelMin, capsuleWindow, capsuleLevelMin, sweiFlag, outline))
 
     

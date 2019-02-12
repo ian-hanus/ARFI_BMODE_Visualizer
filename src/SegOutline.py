@@ -1,4 +1,4 @@
-def plot_combine(seg_file, bmode_file, capsule_file, lesion_slice_index, bmode_window, bmode_min_level, capsule_window,
+def plot_combine(seg_file, bmode_file, capsule_file, mask_file, lesion_slice_index, bmode_window, bmode_min_level, capsule_window,
                  capsule_min_level, swei_flag, outline_flag, ax, fig):
     import matplotlib.pyplot as plt
     import nibabel as nib
@@ -98,6 +98,24 @@ def plot_combine(seg_file, bmode_file, capsule_file, lesion_slice_index, bmode_w
                     for z in range(0, len(x_delta)):
                         bmode_filtered[x+x_delta[z]][y+y_delta[z]] = 255
 
+    # Load ARFI mask
+    mask_total = nib.load(mask_file)
+    mask_data = mask_total.dataobj[..., :]
+
+    # Read relative scalings of each dimension
+    mask_data = mask_data[:, :, lesion_slice_index]
+    mask_data = mask_data.transpose()
+    mask_voxel_size = {'axial': mask_total.get_qform()[0, 0], 'ele': mask_total.get_qform()[1, 1]}
+    mask_ele = [y * mask_voxel_size['ele'] for y in range(0, mask_data.shape[1])]
+    mask_ele -= max(mask_ele) / 2
+    mask_copy = mask_data.copy()
+    mask_copy = mask_copy * seg_binary
+    mask_copy = mask_copy.astype(float)
+    mask_copy[mask_copy == 0] = np.nan
+    mask_copy = np.squeeze(mask_copy)
+    mask_copy = mask_copy * seg_binary
+
+
 
 
 
@@ -107,6 +125,8 @@ def plot_combine(seg_file, bmode_file, capsule_file, lesion_slice_index, bmode_w
     if swei_flag == 0:
         ax.imshow(capsule_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)],
                             cmap='copper', vmin=capsule_min_level, vmax=capsule_min_level + capsule_window)
+        ax.imshow(mask_copy, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)],
+                        cmap='winter')
         plt.title("ARFI Capsule/B-mode Background")
     else:
         cax = ax.imshow(capsule_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)],
