@@ -20,8 +20,8 @@ def plot_combine(seg_file, bmode_file, capsule_file, mask_file, lesion_slice_ind
     offset_string = ""
     for digit in seg_offset_string:
         offset_string += str(digit)
-    offset_strings = offset_string.split(" ");
-    offset_count = 0;
+    offset_strings = offset_string.split(" ")
+    offset_count = 0
     seg_offset = [0, 0, 0]
     for offset in offset_strings:
         seg_offset[offset_count] = int(offset)
@@ -89,10 +89,10 @@ def plot_combine(seg_file, bmode_file, capsule_file, mask_file, lesion_slice_ind
 
     # Create B-mode array where segmentation is not
     bmode_filtered = seg_binary_inv * bmode_data
-    if(outline_flag == 1):
+    if outline_flag == 1:
         for x in range(0, seg_binary_inv.shape[0] - 1):
             for y in range(0, seg_binary_inv.shape[1] - 1):
-                if checkNeighbors(x, y, seg_binary_inv):
+                if check_neighbors(x, y, seg_binary_inv):
                     x_delta = [0, 0, 0, -1, 1, -1, 1, -1, 1]
                     y_delta = [0, -1, 1, 0, 0, -1, 1, 1, -1]
                     for z in range(0, len(x_delta)):
@@ -115,10 +115,6 @@ def plot_combine(seg_file, bmode_file, capsule_file, mask_file, lesion_slice_ind
     mask_copy = np.squeeze(mask_copy)
     mask_copy = mask_copy * seg_binary
 
-
-
-
-
     # Show the arrays on the same set of axes w/ different colormaps
     ax.imshow(bmode_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)], cmap='gray',
               vmin=bmode_min_level, vmax=bmode_min_level + bmode_window)
@@ -139,7 +135,7 @@ def plot_combine(seg_file, bmode_file, capsule_file, mask_file, lesion_slice_ind
     ax.set_ylabel("Depth (mm)")
 
 
-def checkNeighbors(x_coordinate, y_coordinate, seg_binary_inverse):
+def check_neighbors(x_coordinate, y_coordinate, seg_binary_inverse):
     if seg_binary_inverse[x_coordinate][y_coordinate] != 0:
         x_delta = [0, 0, -1, 1, -1, 1, -1, 1]
         y_delta = [-1, 1, 0, 0, -1, 1, 1, -1]
