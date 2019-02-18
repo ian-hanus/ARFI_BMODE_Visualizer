@@ -4,11 +4,12 @@ Created on Nov 26, 2018
 @author: Ian_Hanus 
 '''
 import matplotlib.pyplot as plt
+import os
 from src.SegOutline import plot_combine
 
 # Folder path containing seg, arfi, and bmode files
-inputFile = "C:/Users/Ian_Hanus/Desktop/SlicerCustomVisualization/CustomVisualization/DisplayPlot/myInput.txt"
-f = open(inputFile)
+inputFile = "/resources/InfoHolder.txt"
+f = open(os.path.join(os.environ["HOMEPATH"], "InfoHolder.txt"))
 stringInputs = f.read()
 inputs = stringInputs.split(", ")
 
