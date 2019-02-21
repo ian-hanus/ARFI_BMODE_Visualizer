@@ -53,7 +53,7 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     self.arfi_selector.showHidden = False
     self.arfi_selector.showChildNodeTypes = False
     self.arfi_selector.setMRMLScene( slicer.mrmlScene )
-    self.arfi_selector.setToolTip( "Pick the ARFI volume." )
+    self.arfi_selector.setToolTip( "Pick the ARFI volume.")
     parameters_form_layout.addRow("ARFI Volume: ", self.arfi_selector)
 
     # SWEI volume selector
