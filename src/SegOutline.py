@@ -13,8 +13,7 @@ def plot_combine(seg_file, bmode_file, capsule_file, mask_file, lesion_slice_ind
     mask_data = mask_total.dataobj[..., :]
     bmode_data = bmode_total.get_data()
     capsule_data = capsule_total.dataobj[..., :]
-     
-    # Load B-mode file and split metadata from data
+
     bmode_voxel_size = {'lat': bmode_total.get_qform()[2, 2]}
     bmode_lat = [z*bmode_voxel_size['lat'] for z in range(0, bmode_data.shape[2])]
     bmode_lat -= max(bmode_lat) / 2
@@ -25,8 +24,7 @@ def plot_combine(seg_file, bmode_file, capsule_file, mask_file, lesion_slice_ind
     bmode_axial = [x*bmode_voxel_size['axial'] for x in range(0, bmode_slice_data.shape[0])]
     bmode_ele = [y*bmode_voxel_size['ele'] for y in range(0, bmode_slice_data.shape[1])]
     bmode_ele -= max(bmode_ele) / 2
-    
-    # Load ARFI file and split metadata from data
+
     capsule_data = capsule_data[:, :, lesion_slice_index]
     capsule_data = capsule_data.transpose()
     capsule_voxel_size = {'axial': capsule_total.get_qform()[0, 0], 'ele': capsule_total.get_qform()[1, 1]}
@@ -41,7 +39,6 @@ def plot_combine(seg_file, bmode_file, capsule_file, mask_file, lesion_slice_ind
     bmode_filtered = create_outline(bmode_slice_data, seg_binary_inv, outline_flag)
     mask_filtered = create_mask_layer(mask_data, mask_total, lesion_slice_index, seg_binary)
 
-    # Show the arrays on the same set of axes w/ different colormaps
     ax.imshow(bmode_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)], cmap='gray',
               vmin=bmode_min_level, vmax=bmode_min_level + bmode_window)
     if swei_flag == 0:
@@ -55,12 +52,14 @@ def plot_combine(seg_file, bmode_file, capsule_file, mask_file, lesion_slice_ind
                         cmap='inferno_r', vmin=capsule_min_level, vmax=capsule_min_level + capsule_window)
         plt.title("SWEI Capsule/B-mode Background")
         fig.colorbar(cax)
-    
-    # Add title, labels, and colorbar
+
     ax.set_xlabel("Elevation (mm)")
     ax.set_ylabel("Depth (mm)")
 
 
+#
+# Check to see if pixel is on the edge of capsule segmentation
+#
 def check_neighbors(x_coordinate, y_coordinate, seg_binary_inverse):
     if seg_binary_inverse[x_coordinate][y_coordinate] != 0:
         x_delta = [0, 0, -1, 1, -1, 1, -1, 1]
@@ -71,6 +70,9 @@ def check_neighbors(x_coordinate, y_coordinate, seg_binary_inverse):
     return False
 
 
+#
+# Create a white outline around the capsule
+#
 def create_outline(bmode_slice_data, seg_binary_inv, outline_flag):
     bmode_filtered = seg_binary_inv * bmode_slice_data
     if outline_flag == 1:
@@ -84,6 +86,10 @@ def create_outline(bmode_slice_data, seg_binary_inv, outline_flag):
     return bmode_filtered
 
 
+#
+# Create a binary map inside the capsule segmentation detailing where the ARFI signal is low confidence and should
+# be blocked
+#
 def create_mask_layer(mask_data, mask_total, lesion_slice_index, seg_binary):
     import numpy as np
     mask_data = mask_data[:, :, lesion_slice_index].transpose()
@@ -95,25 +101,24 @@ def create_mask_layer(mask_data, mask_total, lesion_slice_index, seg_binary):
     mask_filtered = np.squeeze(mask_filtered)
     return mask_filtered
 
-
+#
+# Create a binary map for where the segmentation says the capsule is
+#
 def create_seg_layer(seg_total, bmode_slice_data, lesion_slice_index):
     import numpy as np
 
     seg_data = seg_total[0]
     seg_meta = seg_total[1]
 
-    # Read relative offset and dimensions of segmentation
     seg_offset_string = seg_meta['Segmentation_ReferenceImageExtentOffset']
     seg_voxel_scale = seg_meta['space directions']
     seg_offset = [int(i) for i in seg_offset_string.split()]
 
-    # Get matrix of segment data for a given slice
     if lesion_slice_index - seg_offset[2] > seg_data.shape[2]:
         raise ValueError("lesion_slice_index outside of prostate capsule")
     seg_data = seg_data[:, :, lesion_slice_index - seg_offset[2]]
     seg_data = seg_data.transpose()
 
-    # Split scaling of segmentation voxels for each dimension
     seg_voxel_size = {'lat': sum(seg_voxel_scale[0]), 'axial': abs(sum(seg_voxel_scale[1])),
                       'ele': abs(sum(seg_voxel_scale[2]))}
     seg_ele = [y * seg_voxel_size['ele'] for y in range(0, seg_data.shape[1])]
