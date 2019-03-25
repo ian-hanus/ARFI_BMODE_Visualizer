@@ -119,10 +119,21 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     parameters_form_layout.addRow("Capsule Type:", self.arfiButton)
     parameters_form_layout.addRow("", self.sweiButton)
 
+    # Radio buttons for slice
+    self.sliceComboBox = qt.QComboBox()
+    self.sliceComboBox.addItem("Axial")
+    self.sliceComboBox.addItem("Coronal")
+    parameters_form_layout.addRow("Slice Type", self.sliceComboBox)
+
     # Outline checkbox
     self.outlineCheck = qt.QCheckBox("")
     self.outlineCheck.setChecked(False)
     parameters_form_layout.addRow("White Outline Around Capsule: ", self.outlineCheck)
+
+    self.colormapCheck = qt.QCheckBox("")
+    self.outlineCheck.setChecked(False)
+    parameters_form_layout.addRow("Use Grey Capsule Colormap: ", self.colormapCheck)
+
 
     # Add vertical spacer
     self.layout.addStretch(1)
@@ -131,15 +142,28 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     self.onSelect()
 
   def onSelect(self):
-    self.applyButton.enabled = self.bmode_selector.currentNode() and self.arfi_selector.currentNode() and self.segmentation_selector.currentNode() and self.swei_selector.currentNode() and self.mask_selector.currentNode()
+    self.applyButton.enabled = self.bmode_selector.currentNode() and self.arfi_selector.currentNode() and self.segmentation_selector.currentNode() \
+                               and self.swei_selector.currentNode() and self.mask_selector.currentNode() and self.sliceComboBox.activated.connect(self.handleActivated()) \
 
-  def onApplyButton(self):  
+  def handleActivated(self):
+    print("Locked slice type")
+
+  def onApplyButton(self):
+    sliceName = self.sliceComboBox.currentText
+    if sliceName == "Sagittal":
+      sliceType = "Yellow"
+    elif sliceName == "Coronal":
+      sliceType = "Green"
+    else:
+      sliceType = "Red"
+    print(sliceType)
+
     lm = slicer.app.layoutManager()
-    red = lm.sliceWidget('Red')
-    redLogic = red.sliceLogic()
+    slice = lm.sliceWidget(sliceType)
+    sliceLogic = slice.sliceLogic()
     # Print current slice offset position
-    redOffset = redLogic.GetSliceOffset()
-    sliceIndex = redLogic.GetSliceIndexFromOffset(redOffset)
+    sliceOffset = sliceLogic.GetSliceOffset()
+    sliceIndex = sliceLogic.GetSliceIndexFromOffset(sliceOffset)
 
     sweiImage = self.sweiButton.isChecked()
 
@@ -184,11 +208,14 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
       outline = 1
 
     test_file = open(os.path.join(os.environ["HOMEPATH"], "InfoHolder.txt"), 'w')
-    
-    test_file.write("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, maskFile, sliceIndex, bmodeWindow,
-                                                    bmodeLevelMin, capsuleWindow, capsuleLevelMin, sweiFlag, outline))
 
-    
+    grayMap = 0
+    if self.colormapCheck.isChecked():
+      grayMap = 1
+    print("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, maskFile, sliceIndex, bmodeWindow,
+                                                    bmodeLevelMin, capsuleWindow, capsuleLevelMin, sweiFlag, outline, sliceType, grayMap))
+    test_file.write("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, maskFile, sliceIndex, bmodeWindow,
+                                                    bmodeLevelMin, capsuleWindow, capsuleLevelMin, sweiFlag, outline, sliceType, grayMap))
     test_file.close()
 
 
