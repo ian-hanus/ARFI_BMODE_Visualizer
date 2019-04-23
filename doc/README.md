@@ -1,10 +1,12 @@
 # Using the Segmentation Display Tool
 ### Instructions in Slicer
-1. Under the modules dropdown, select Extension Wizard
-2. Click "Select Extension" and navigate to the downloaded ArfiBmodeSegDisplay folder
-3. Go back to the modules dropdown and select the newly added "Segmentation Display" module
-4. Select all of the proper volumes next to the labels and hit apply
-5. Open the runDisplay.py file in the Python IDE of your choice (currently using Pycharm but should work with any)
+1. Place the zipped "ArfiBmodeSegDisplay.zip" file in the desired location
+2. Unzip the file
+3. Open slicer, and open the "Extension Wizard" module from the modules dropdown
+4. Click "Select Extension" and select the "ArfiBmodeSegDisplay" folder
+5. When prompted, check "Add selected module to search paths" and click ok
+6. Extension should now be available in modules dropdown as "Segmentation Display"
+7. Select all of the proper volumes and preferences in the module and click apply
 
 
 ### Instructions in Python
