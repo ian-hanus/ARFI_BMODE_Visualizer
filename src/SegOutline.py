@@ -168,7 +168,7 @@ def plot_combine(seg_file, bmode_file, capsule_file, mask_file, lesion_file, les
             print("No lesion segmentation")
     ax.set_xlabel("Elevation (mm)")
     ax.set_ylabel("Depth (mm)")
-    # plt.savefig("Bmode" + str(lesion_slice_index + 3000) + ".png")
+    # plt.savefig("Bmode" + str(lesion_slice_index + 3000) + ".png") ## this was used to generate the gif using a for loop in the main runDisplay.py class
     # plt.close(fig)
     return
 
