@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6112c9e-f293-41bb-bd48-ab82356a4a24" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Ian_Hanus.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Ian_Hanus.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SegDisplay.py" beforeDir="false" afterPath="$PROJECT_DIR$/SegDisplay.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SegOutline.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/SegOutline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/runDisplay.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/runDisplay.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/doc/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CoronalPlot.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/CoronalPlot.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,21 +26,21 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SegOutline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1958">
-              <caret line="227" column="22" lean-forward="true" selection-start-line="227" selection-start-column="22" selection-end-line="227" selection-end-column="22" />
+            <state relative-caret-position="438">
+              <caret line="153" column="43" selection-start-line="153" selection-start-column="43" selection-end-line="153" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/doc/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="323">
-                <caret line="19" column="120" selection-start-line="19" selection-start-column="120" selection-end-line="19" selection-end-column="120" />
+              <first_editor relative-caret-position="374">
+                <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
               </first_editor>
               <second_editor />
             </state>
@@ -69,7 +67,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>data[</find>
       <find>sliceIndex</find>
       <find>bmode_voxel_si</find>
       <find>capsule_ele</find>
@@ -99,6 +96,7 @@
       <find>create_mask_</find>
       <find>bmode_data</find>
       <find>offset</find>
+      <find>mask_filtered</find>
     </findStrings>
     <replaceStrings>
       <replace>bmode_window</replace>
@@ -128,12 +126,12 @@
         <option value="$PROJECT_DIR$/src/SegDisplay.py" />
         <option value="C:/Python37/Lib/site-packages/nibabel/volumeutils.py" />
         <option value="$PROJECT_DIR$/Resources/requirements.txt" />
-        <option value="$PROJECT_DIR$/src/CoronalPlot.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/SegDisplay.py" />
         <option value="$PROJECT_DIR$/src/runDisplay.py" />
-        <option value="$PROJECT_DIR$/src/SegOutline.py" />
         <option value="$PROJECT_DIR$/doc/README.md" />
+        <option value="$PROJECT_DIR$/src/CoronalPlot.py" />
+        <option value="$PROJECT_DIR$/src/SegOutline.py" />
       </list>
     </option>
   </component>
@@ -448,13 +446,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CoronalPlot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SegDisplay.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3876">
@@ -472,20 +463,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SegOutline.py">
+    <entry file="file://$PROJECT_DIR$/src/CoronalPlot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1958">
-          <caret line="227" column="22" lean-forward="true" selection-start-line="227" selection-start-column="22" selection-end-line="227" selection-end-column="22" />
+        <state relative-caret-position="1037">
+          <caret line="61" column="31" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/doc/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="323">
-            <caret line="19" column="120" selection-start-line="19" selection-start-column="120" selection-end-line="19" selection-end-column="120" />
+          <first_editor relative-caret-position="374">
+            <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SegOutline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="153" column="43" selection-start-line="153" selection-start-column="43" selection-end-line="153" selection-end-column="43" />
         </state>
       </provider>
     </entry>

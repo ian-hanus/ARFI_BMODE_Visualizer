@@ -59,8 +59,8 @@ def plot_coronal_test(seg_file, bmode_file, capsule_file, mask_file, lesion_slic
     if swei_flag == 0:
         ax.imshow(capsule_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_depth), max(bmode_depth)],
                   cmap='copper', vmin=capsule_min_level, vmax=capsule_min_level + capsule_window)
-        # ax.imshow(mask_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)],
-        #           cmap='winter')
+        ax.imshow(mask_filtered, extent=[min(bmode_ele), max(bmode_ele), min(bmode_axial), max(bmode_axial)],
+                  cmap='winter')
         plt.title("ARFI Capsule/B-mode Background")
 
     else:

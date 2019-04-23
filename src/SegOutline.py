@@ -150,7 +150,7 @@ def plot_combine(seg_file, bmode_file, capsule_file, mask_file, lesion_file, les
         else:
             capsule_color = 'copper'
         ax.imshow(np.squeeze(capsule_filtered), cmap=capsule_color, vmin=capsule_min_level, vmax=capsule_min_level + capsule_window)
-        #ax.imshow(mask_filtered, cmap='winter')
+        ax.imshow(mask_filtered, cmap='winter')
         plt.title("ARFI Capsule/B-mode Background")
     else:
         if gray_map == 1:

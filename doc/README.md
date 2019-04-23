@@ -20,4 +20,4 @@ for the Slicer API before attempting to add new features)
 2. The functionality of the program occurs in the SegOutline.py file. Notably this includes commenting out the code
 specifying a lesion outline if one is not chosen, as I did not have time to add a toggle switch in the Slicer GUI yet.
 All of the preference based plotting such as colormaps can be edited by changing the preferences in the ax.imshow lines.
-
+    
