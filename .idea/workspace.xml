@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6112c9e-f293-41bb-bd48-ab82356a4a24" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Resources/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Ian_Hanus.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Ian_Hanus.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SegDisplay.py" beforeDir="false" afterPath="$PROJECT_DIR$/SegDisplay.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SegOutline.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/SegOutline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/runDisplay.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/runDisplay.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +19,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SegDisplay.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="3876">
+              <caret line="231" column="85" selection-start-line="231" selection-start-column="85" selection-end-line="231" selection-end-column="85" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -29,8 +31,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SegOutline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
-              <caret line="54" column="41" selection-start-line="54" selection-start-column="41" selection-end-line="54" selection-end-column="41" />
+            <state relative-caret-position="1958">
+              <caret line="227" column="22" lean-forward="true" selection-start-line="227" selection-start-column="22" selection-end-line="227" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/doc/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="323">
+                <caret line="19" column="120" selection-start-line="19" selection-start-column="120" selection-end-line="19" selection-end-column="120" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -38,47 +52,53 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/runDisplay.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-              <folding>
-                <element signature="e#53#84#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Resources/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="153">
+              <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getWindo</find>
-      <find>arfiSelector</find>
-      <find>min_level</find>
-      <find>qt</find>
-      <find>capsuleLev</find>
-      <find>capsule_wind</find>
-      <find>sweiFlag</find>
-      <find>window</find>
-      <find>arfi</find>
-      <find>print</find>
-      <find>parametersForm</find>
-      <find>sweiImage</find>
+      <find>data[</find>
+      <find>sliceIndex</find>
+      <find>bmode_voxel_si</find>
+      <find>capsule_ele</find>
+      <find>bmode_axia</find>
+      <find>bmode_axial</find>
+      <find>bmode_slice_data</find>
       <find>capsule_data</find>
-      <find>capsule_total</find>
-      <find>capsule</find>
-      <find>sweiSelector</find>
-      <find>maskSelector</find>
-      <find>checkNeighbors</find>
-      <find>_init_</find>
+      <find>mask_data</find>
+      <find>create_seg</find>
+      <find>seg_offset[0]</find>
+      <find>seg_offset[2]</find>
+      <find>seg_offset</find>
+      <find>seg_data</find>
+      <find>.copy</find>
+      <find>seg_offset[</find>
+      <find>bmode_depth</find>
+      <find>seg_voxel_scale</find>
+      <find>self.outlineChec</find>
+      <find>bmode_data.</find>
+      <find>create</find>
+      <find>bmode_ele</find>
+      <find>segmentation</find>
+      <find>ax, fig</find>
+      <find>ax</find>
+      <find>print</find>
+      <find>seg_data_slice</find>
+      <find>create_mask_</find>
+      <find>bmode_data</find>
+      <find>offset</find>
     </findStrings>
     <replaceStrings>
       <replace>bmode_window</replace>
@@ -91,6 +111,12 @@
       <replace>mask</replace>
       <replace>mask_selector</replace>
       <replace>check_neighbors</replace>
+      <replace>bmode_slice_data</replace>
+      <replace>bmode_data_slice</replace>
+      <replace>capsule_data_slice</replace>
+      <replace>mask_data_slice</replace>
+      <replace>seg_offset</replace>
+      <replace>bmode_depth</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -101,15 +127,19 @@
       <list>
         <option value="$PROJECT_DIR$/src/SegDisplay.py" />
         <option value="C:/Python37/Lib/site-packages/nibabel/volumeutils.py" />
-        <option value="$PROJECT_DIR$/src/SegOutline.py" />
-        <option value="$PROJECT_DIR$/src/runDisplay.py" />
-        <option value="$PROJECT_DIR$/SegDisplay.py" />
         <option value="$PROJECT_DIR$/Resources/requirements.txt" />
+        <option value="$PROJECT_DIR$/src/CoronalPlot.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/SegDisplay.py" />
+        <option value="$PROJECT_DIR$/src/runDisplay.py" />
+        <option value="$PROJECT_DIR$/src/SegOutline.py" />
+        <option value="$PROJECT_DIR$/doc/README.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
+    <option name="x" value="66" />
+    <option name="y" value="332" />
     <option name="width" value="2272" />
     <option name="height" value="2932" />
   </component>
@@ -129,17 +159,12 @@
             <path>
               <item name="SegDisplay" type="b2602c69:ProjectViewProjectNode" />
               <item name="SegDisplay" type="462c0819:PsiDirectoryNode" />
-              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="SegDisplay" type="b2602c69:ProjectViewProjectNode" />
               <item name="SegDisplay" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SegDisplay" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SegDisplay" type="462c0819:PsiDirectoryNode" />
-              <item name="Testing" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -155,8 +180,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Ian_Hanus\Desktop\DisplaySlicerExtension\ArfiBmodeSegDisplay\SegDisplay" />
       <recent name="C:\Users\Ian_Hanus\Desktop\DisplaySlicerExtension\ArfiBmodeSegDisplay\SegDisplay\src" />
+      <recent name="C:\Users\Ian_Hanus\Desktop\DisplaySlicerExtension\ArfiBmodeSegDisplay\SegDisplay" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Ian_Hanus\Desktop\DisplaySlicerExtension\ArfiBmodeSegDisplay\SegDisplay" />
@@ -270,7 +295,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_keywords" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/SegDisplay.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/src/SegDisplay.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
@@ -284,8 +309,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.runDisplay" />
-        <item itemvalue="Python.dataobj_images" />
         <item itemvalue="Python.SegOutline" />
+        <item itemvalue="Python.dataobj_images" />
         <item itemvalue="Python tests.pytest in SegDisplay.py" />
       </list>
     </recent_temporary>
@@ -323,19 +348,38 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32911393" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39985108" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49438706" weight="0.32911393" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49932644" weight="0.39985108" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49977547" weight="0.3298585" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5056129" side_tool="true" weight="0.32911393" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49932644" weight="0.32911393" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15312079" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49438706" visible="true" weight="0.32911393" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49932644" weight="0.39985108" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49977547" weight="0.3298585" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5056129" side_tool="true" visible="true" weight="0.32911393" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49932644" weight="0.32911393" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://C:/Python37/Lib/site-packages/numpy/core/numeric.py">
@@ -380,10 +424,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Resources/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python37/Lib/site-packages/matplotlib/image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="394" selection-start-line="394" selection-end-line="394" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="85">
+            <caret line="5" column="74" selection-start-line="5" selection-start-column="74" selection-end-line="5" selection-end-column="74" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CoronalPlot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" lean-forward="true" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SegDisplay.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="3876">
+          <caret line="231" column="85" selection-start-line="231" selection-start-column="85" selection-end-line="231" selection-end-column="85" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -392,25 +467,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/runDisplay.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-          <folding>
-            <element signature="e#53#84#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SegOutline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="54" column="41" selection-start-line="54" selection-start-column="41" selection-end-line="54" selection-end-column="41" />
+        <state relative-caret-position="1958">
+          <caret line="227" column="22" lean-forward="true" selection-start-line="227" selection-start-column="22" selection-end-line="227" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Resources/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+    <entry file="file://$PROJECT_DIR$/doc/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="323">
+            <caret line="19" column="120" selection-start-line="19" selection-start-column="120" selection-end-line="19" selection-end-column="120" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

@@ -80,7 +80,19 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     self.segmentation_selector.showChildNodeTypes = False
     self.segmentation_selector.setMRMLScene( slicer.mrmlScene )
     self.segmentation_selector.setToolTip( "Pick the capsule segmentation." )
-    parameters_form_layout.addRow("Segmentation: ", self.segmentation_selector)
+    parameters_form_layout.addRow(" Capsule Segmentation: ", self.segmentation_selector)
+
+    self.lesion_segmentation_selector = slicer.qMRMLNodeComboBox()
+    self.lesion_segmentation_selector.nodeTypes = ["vtkMRMLSegmentationNode"]
+    self.lesion_segmentation_selector.selectNodeUponCreation = True
+    self.lesion_segmentation_selector.addEnabled = False
+    self.lesion_segmentation_selector.removeEnabled = False
+    self.lesion_segmentation_selector.noneEnabled = False
+    self.lesion_segmentation_selector.showHidden = False
+    self.lesion_segmentation_selector.showChildNodeTypes = False
+    self.lesion_segmentation_selector.setMRMLScene(slicer.mrmlScene)
+    self.lesion_segmentation_selector.setToolTip("Pick the lesion segmentation.")
+    parameters_form_layout.addRow("Lesion Segmentation: ", self.lesion_segmentation_selector)
 
     # Arfi Mask Selector
     self.mask_selector = slicer.qMRMLNodeComboBox()
@@ -110,6 +122,7 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     self.arfi_selector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
     self.swei_selector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
     self.segmentation_selector.connect("currentNodeChanged(vtkMRMLSegmentationNode*)", self.onSelect)
+    self.lesion_segmentation_selector.connect("currentNodeChanged(vtkMRMLSegmentationNode*)", self.onSelect)
     self.mask_selector.connect("currentNodeChanged(vtkMRMLNode*)", self.onSelect)
 
     # Radio buttons
@@ -144,6 +157,7 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
   def onSelect(self):
     self.applyButton.enabled = self.bmode_selector.currentNode() and self.arfi_selector.currentNode() and self.segmentation_selector.currentNode() \
                                and self.swei_selector.currentNode() and self.mask_selector.currentNode() and self.sliceComboBox.activated.connect(self.handleActivated()) \
+                               and self.lesion_segmentation_selector.currentNode()
 
   def handleActivated(self):
     print("Locked slice type")
@@ -182,6 +196,7 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     sweiNode = self.swei_selector.currentNode()
     segNode = self.segmentation_selector.currentNode()
     maskNode = self.mask_selector.currentNode()
+    lesionSegNode = self.lesion_segmentation_selector.currentNode()
 
     bmodeVolumeDisplay = bmodeNode.GetScalarVolumeDisplayNode()
     bmodeWindow = bmodeVolumeDisplay.GetWindow()
@@ -202,6 +217,7 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     capsuleFile = pathFromNode(capsuleNode)
     segFile = pathFromNode(segNode)
     maskFile = pathFromNode(maskNode)
+    lesionSegFile = pathFromNode(lesionSegNode)
 
     outline = 0
     if self.outlineCheck.isChecked():
@@ -212,9 +228,9 @@ class SegDisplayWidget(ScriptedLoadableModuleWidget):
     grayMap = 0
     if self.colormapCheck.isChecked():
       grayMap = 1
-    print("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, maskFile, sliceIndex, bmodeWindow,
+    print("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, maskFile, lesionSegFile, sliceIndex, bmodeWindow,
                                                     bmodeLevelMin, capsuleWindow, capsuleLevelMin, sweiFlag, outline, sliceType, grayMap))
-    test_file.write("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, maskFile, sliceIndex, bmodeWindow,
+    test_file.write("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s" % (segFile, bmodeFile, capsuleFile, maskFile, lesionSegFile, sliceIndex, bmodeWindow,
                                                     bmodeLevelMin, capsuleWindow, capsuleLevelMin, sweiFlag, outline, sliceType, grayMap))
     test_file.close()
 
